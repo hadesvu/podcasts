@@ -1,0 +1,106 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "com.example.podcast"
+        minSdk 21
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion "$composeCompilerVersion"
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation "androidx.compose.ui:ui:$composeVersion"
+    implementation "androidx.compose.material:material:$composeVersion"
+    implementation "androidx.compose.ui:ui-tooling-preview:$composeVersion"
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
+    implementation 'androidx.activity:activity-compose:1.3.1'
+
+    // Architecture Components
+    implementation "androidx.room:room-runtime:$roomVersion"
+    implementation 'androidx.test.ext:junit-ktx:1.1.3'
+    kapt "androidx.room:room-compiler:$roomVersion"
+    implementation "androidx.room:room-ktx:$roomVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$archLifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$archLifecycleVersion"
+
+    testImplementation "junit:junit:$junitVersion"
+    testImplementation "org.hamcrest:hamcrest-all:$hamcrestVersion"
+    testImplementation "androidx.arch.core:core-testing:$archTestingVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+    testImplementation "org.robolectric:robolectric:$robolectricVersion"
+    testImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    testImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
+    testImplementation "androidx.test.espresso:espresso-intents:$espressoVersion"
+    testImplementation "com.google.truth:truth:$truthVersion"
+    testImplementation "androidx.compose.ui:ui-test-junit4:$composeVersion"
+
+    // Dependencies for Android unit tests
+    androidTestImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$composeVersion"
+
+    // AndroidX Test - JVM testing
+    testImplementation "androidx.test:core-ktx:$androidXTestCoreVersion"
+    testImplementation "androidx.test.ext:junit-ktx:$androidXTestExtKotlinRunnerVersion"
+    testImplementation "androidx.test:rules:$androidXTestRulesVersion"
+    implementation "androidx.test:core:$androidXTestCoreVersion"
+
+    // AndroidX Test - Instrumented testing
+    androidTestImplementation "androidx.test:core-ktx:$androidXTestCoreVersion"
+    androidTestImplementation "androidx.test.ext:junit-ktx:$androidXTestExtKotlinRunnerVersion"
+    androidTestImplementation "androidx.test:rules:$androidXTestRulesVersion"
+    androidTestImplementation "androidx.room:room-testing:$roomVersion"
+    androidTestImplementation "androidx.arch.core:core-testing:$archTestingVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso.idling:idling-concurrent:$espressoVersion"
+    androidTestImplementation "org.robolectric:annotations:$robolectricVersion"
+    implementation "androidx.test.espresso:espresso-idling-resource:$espressoVersion"
+
+    // AndroidX Test - Hilt testing
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$composeVersion"
+    debugImplementation "androidx.compose.ui:ui-tooling:$composeVersion"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:$composeVersion"
+}
